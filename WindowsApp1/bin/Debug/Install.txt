@@ -1,6 +1,0 @@
-ByteInjector.exe
-chromedriver.exe
-InjectDLL.exe
-RemoteDLLInjector32.exe
-RemoteDLLInjector64.exe
-SimpleInjector64.exe

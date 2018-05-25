@@ -2,10 +2,10 @@
     Private flag As Int32 = 0
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click '확인
-        My.Forms.Form1.installPATH = My.Forms.Form2.DirListBox1.Path & "\"
-        MsgBox(My.Forms.Form1.installPATH)
-        MsgBox("cmd.exe /c dir " & My.Forms.Form1.installPATH & "\*.exe /B > " & My.Forms.Form1.programPATH & "Install.txt")
-        Shell("cmd.exe /c dir " & My.Forms.Form1.installPATH & "\*.exe /B > " & My.Forms.Form1.programPATH & "Install.txt")
+        My.Forms.Form1.PATH_List = My.Forms.Form2.DirListBox1.Path & "\"
+        'MsgBox(My.Forms.Form1.PATH_List)
+        'MsgBox("cmd.exe /c dir " & My.Forms.Form1.installPATH & "\*.exe /B > " & My.Forms.Form1.programPATH & "Install.txt")
+        'Shell("cmd.exe /c dir " & My.Forms.Form1.installPATH & "\*.exe /B > " & My.Forms.Form1.programPATH & "Install.txt")
         My.Forms.Form2.Close()
     End Sub
 

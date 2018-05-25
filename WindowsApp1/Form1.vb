@@ -1,102 +1,37 @@
-﻿Imports System.Runtime.InteropServices
-
-
-Public Class Form1
-    <DllImport("kernel32", CharSet:=CharSet.Auto)>
-    Public Shared Function OpenProcess(ByVal Access As Int32, ByVal InheritHandle As Boolean, ByVal ProcessId As Int32) As Long
-    End Function
-
-    'Private Declare Function OpenProcess Lib "kernel32" (ByVal dwDesiredAccess As Long, ByVal blnheritHandle As Boolean, ByVal dwAppProcessId As IntPtr) As IntPtr
-    'Private Declare Function OpenProcess Lib "kernel32" (ByVal dwDesiredAccess As Long, ByVal bInheritHandle As Long, ByVal dwProcessId As Long) As Long
-    '지정한 프로세스 오브젝트 핸들링
-
-    Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (
-        ByVal hWnd As Long,
-        ByVal lpOperation As String,
-        ByVal lpFile As String,
-        ByVal lpParameters As String,
-        ByVal lpDirectory As String,
-        ByVal nShowCmd As Long) As Long
-
-
-
-    Public Shared Function GetExitCodeProcess(hProcess As Long, lpExitCode As Long) As Long
-#Disable Warning BC42353 ' 함수가 일부 코드 경로의 값을 반환하지 않음
-    End Function
-#Enable Warning BC42353 ' 함수가 일부 코드 경로의 값을 반환하지 않음
-
-    '열러있는 프로세스 오브젝트 핸들링 해제
-    Public Shared Function CloseHandle(hObject As Long) As Long
-#Disable Warning BC42353 ' 함수가 일부 코드 경로의 값을 반환하지 않음
-    End Function
-#Enable Warning BC42353 ' 함수가 일부 코드 경로의 값을 반환하지 않음
-
-    Public PROCESS_QUERY_INFORMATION = &H400&
-    Public STILL_ACTIVE = &H103&
-
-
-
-
-
-
-    Public installPATH As String = ""   ' exe파일 탐색 경로
-    Public programPATH As String = ""   ' 프로그램 절대 경로
+﻿Public Class Form1
+    Public PATH_Exe As String = ""   ' exe파일 탐색 경로
+    Public PATH_List As String = ""   ' 프로그램 절대 경로
     Public ComputerName As String = ""  ' 컴퓨터 이름
 
 
 
-
-
-
-
     Private Sub Form1_Load() Handles MyBase.Load '<- 프로그램 초기 설정을 위한 호출
-        programPATH = Trim(Application.StartupPath) & "\" ' & vbCrLf
-        If My.Computer.FileSystem.FileExists(programPATH & "list.txt") Then
-            ShowListToCheckedlist()
+        PATH_List = Trim(Application.StartupPath) & "\" ' & vbCrLf
+        If My.Computer.FileSystem.FileExists(PATH_List & "list.txt") Then
+            ShowList()
         End If
         ComputerName = My.Computer.Name
 
     End Sub
 
-    Private Sub SaveEXEList()
+    ' --------------------------------------------------------------------------  exe 관련 부분
 
-    End Sub
-
-
-    Private Sub SaveList()
-        'ShellEnd(
-        Shell("cmd.exe /c wmic product get name > " & programPATH & "list.txt", vbNormalFocus)
-        ')
-        'ShellEnd(Shell("cmd.exe /c attrib +r " & peogramPATH & "list.txt", vbNormalNoFocus))
-        'attrib -r - s 폴더경로 /s /d
-        'MsgBox("cmd.exe /c wmic product get name > " & programPATH & "list.txt")
+    ' 완료
+    Private Sub SaveExe() ' exe 파일 경로 리스트 저장
+        Shell("cmd.exe /c dir /b " & PATH_Exe & " > " & PATH_List & "exe.txt", vbNormalFocus)
         MsgBox("창이 사라질 때까지 기다려 주세요.")
     End Sub
 
     ' 완료
-    Private Function DelList() ' 저장한 txt 파일을 지움
-        If My.Computer.FileSystem.FileExists(programPATH & "list.txt") Then
-            Shell("cmd.exe /c del " & programPATH & "list.txt")
-            MsgBox("파일 있음")
-        End If
-
-        If My.Computer.FileSystem.FileExists(programPATH & "list.txt") Then
-        Else
-            MsgBox("파일 없음")
-        End If
-        Return 1
-    End Function
-
-    ' 완료
-    Private Sub ShowListInstall() ' 체크드 리스트 박스에 txt 파일을 읽어서 보여줌 - exe 파일
+    Private Sub ShowExe() ' 체크드 리스트 박스에 txt 파일을 읽어서 보여줌 - exe 파일
         Label1.Text = "exe 파일 리스트"
-        If My.Computer.FileSystem.FileExists(programPATH & "Install.txt") Then
+        If My.Computer.FileSystem.FileExists(PATH_List & "exe.txt") Then
             My.Forms.Form1.CheckedListBox1.Items.Clear()
             Dim test As System.IO.StreamReader
             Dim str As String = ""
-            test = My.Computer.FileSystem.OpenTextFileReader(programPATH & "Install.txt")
+            test = My.Computer.FileSystem.OpenTextFileReader(PATH_List & "exe.txt")
             str = test.ReadLine()
-            Do While str <> ""
+            Do
                 If str = "" Then
                     Exit Do
                 End If
@@ -105,6 +40,65 @@ Public Class Form1
                 End If
                 Dim a = My.Forms.Form1.CheckedListBox1.Items.Add(Trim(str))
                 str = test.ReadLine()
+            Loop While str <> ""
+        Else
+            MsgBox("저장된 파일이 없습니다!!!")
+        End If
+        CheckedListBox1.Sorted = True
+    End Sub
+
+    Private Sub DelExe()
+        If My.Computer.FileSystem.FileExists(PATH_List & "exe.txt") Then
+            Shell("cmd.exe /c del " & PATH_List & "list.txt")
+            MsgBox("파일 있음")
+        End If
+
+        If My.Computer.FileSystem.FileExists(PATH_List & "exe.txt") Then
+        Else
+            MsgBox("파일 없음")
+        End If
+    End Sub
+
+    ' --------------------------------------------------------------------------  wmic 관련 부분
+
+    ' 완료
+    Private Sub SaveList() ' 프로그램 리스트 저장
+        Shell("cmd.exe /c wmic product get name > " & PATH_List & "list.txt", vbNormalFocus)
+        MsgBox("창이 사라질 때까지 기다려 주세요.")
+    End Sub
+
+    ' 완료
+    Private Sub DelList() ' 저장한 txt 파일을 지움
+        If My.Computer.FileSystem.FileExists(PATH_List & "list.txt") Then
+            Shell("cmd.exe /c del " & PATH_List & "list.txt")
+            MsgBox("파일 있음")
+        End If
+
+        If My.Computer.FileSystem.FileExists(PATH_List & "list.txt") Then
+        Else
+            MsgBox("파일 없음")
+        End If
+    End Sub
+
+
+    ' 완료
+    Private Sub ShowList() ' 체크드 리스트 박스에 txt 파일을 읽어서 보여줌 - 설치된 프로그램
+        Label1.Text = "설치된 프로그램 리스트"
+        If (My.Computer.FileSystem.FileExists(PATH_List & "list.txt")) Then
+            My.Forms.Form1.CheckedListBox1.Items.Clear()
+            Dim test As System.IO.StreamReader
+            Dim str As String = ""
+            test = My.Computer.FileSystem.OpenTextFileReader(PATH_List & "list.txt")
+            str = test.ReadLine()
+            Do While str <> ""
+                str = test.ReadLine()
+                If str = "" Then
+                    Exit Do
+                End If
+                If str.First.Equals(Chr(32)) Then
+                    str = test.ReadLine()
+                End If
+                Dim a = My.Forms.Form1.CheckedListBox1.Items.Add(Trim(str))
             Loop
         Else
             MsgBox("저장된 파일이 없습니다!!!")
@@ -112,37 +106,19 @@ Public Class Form1
         CheckedListBox1.Sorted = True
     End Sub
 
-    ' 완료
-    Private Function ShowListToCheckedlist() ' 체크드 리스트 박스에 txt 파일을 읽어서 보여줌 - 설치된 프로그램
-        Label1.Text = "설치된 프로그램 리스트"
-        If (My.Computer.FileSystem.FileExists(programPATH & "list.txt")) Then
-            My.Forms.Form1.CheckedListBox1.Items.Clear()
-            Dim test As System.IO.StreamReader
-            Dim str As String = ""
-            test = My.Computer.FileSystem.OpenTextFileReader(programPATH & "list.txt")
-            str = test.ReadLine()
-            Do While str <> ""
-                str = test.ReadLine()
-                If str = "" Then
-                    Exit Do
-                End If
-                If str.First.Equals(Chr(32)) Then
-                    str = test.ReadLine()
-                End If
-                Dim a = My.Forms.Form1.CheckedListBox1.Items.Add(Trim(str))
-            Loop
-        Else
-            MsgBox("저장된 파일이 없습니다!!!")
-        End If
-        CheckedListBox1.Sorted = True
-    End Function
+    ' --------------------------------------------------------------------------  reg 관련 부분
+
+
+
+
+    ' --------------------------------------------------------------------------  버튼 온클릭 관련 부분
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click ' 리스트 저장
         SaveList()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click ' 리스트 보기
-        ShowListToCheckedlist()
+        ShowList()
     End Sub
 
     Private Sub 최소화ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 최소화ToolStripMenuItem.Click
@@ -158,7 +134,7 @@ Public Class Form1
     End Sub
 
     Private Sub 프로그램목록새로고침ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 프로그램목록새로고침ToolStripMenuItem.Click
-        ShowListToCheckedlist()
+        ShowList()
     End Sub
 
     Private Sub 프로그램목록텍스트로저장ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 프로그램목록텍스트로저장ToolStripMenuItem.Click
@@ -201,7 +177,7 @@ Public Class Form1
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click '체크 항목 표시
         SaveList() ' 불러오기 + 저장
-        ShowListToCheckedlist() ' 읽기 + 출력
+        ShowList() ' 읽기 + 출력
         DelList() ' 삭제
     End Sub
 
@@ -211,9 +187,9 @@ Public Class Form1
         'x82_programs = "ddd"
         'MsgBox(x64_programs & Chr(13) & x82_programs)
         'MsgBox(peogramPATH)
-        'Shell("cmd.exe /c wmic product get name > " & programPATH & "list.txt", vbNormalNoFocus)
+        'Shell("cmd.exe /c wmic product get name > " & PATH_List & "list.txt", vbNormalNoFocus)
         'ShowListToCheckedlist()
-        'Shell("cmd.exe /c del " & programPATH & "list.txt")
+        'Shell("cmd.exe /c del " & PATH_List & "list.txt")
 
         'Dim iVaule As Int32 = My.Computer.Registry.GetValue("경로", "값 이름", "기본값")
         'Dim sValue As String = My.Computer.Registry.GetValue("경로", "값 이름", "기본값")
@@ -227,10 +203,7 @@ Public Class Form1
 
         'MsgBox(My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{09215AC7-B15F-A151-B90A-6B432EAD80A8}", "DisplayName", "Nothing!!").ToString())
 
-
-        For Each selectedItem In My.Forms.Form1.CheckedListBox1.CheckedItems()
-            MsgBox("cme.exe /c " & installPATH & selectedItem)
-        Next
+        SaveExe()
     End Sub
 
     Private Sub ProgressBar1_Click(sender As Object, e As EventArgs) Handles ProgressBar1.Click
