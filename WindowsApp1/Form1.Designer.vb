@@ -47,25 +47,29 @@ Partial Class Form1
         Me.Button5 = New System.Windows.Forms.Button()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(431, 393)
+        Me.Button1.Location = New System.Drawing.Point(96, 345)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 23)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "리스트 저장"
+        Me.Button1.Text = "save exe"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(537, 393)
+        Me.Button2.Location = New System.Drawing.Point(96, 374)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(81, 23)
+        Me.Button2.Size = New System.Drawing.Size(83, 23)
         Me.Button2.TabIndex = 1
-        Me.Button2.Text = "리스트 보기"
+        Me.Button2.Text = "show exe"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'MenuStrip1
@@ -187,29 +191,29 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(647, 393)
+        Me.Button3.Location = New System.Drawing.Point(96, 403)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(113, 23)
+        Me.Button3.Size = New System.Drawing.Size(83, 23)
         Me.Button3.TabIndex = 4
-        Me.Button3.Text = "파일 삭제"
+        Me.Button3.Text = "del exe"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(12, 393)
+        Me.Button4.Location = New System.Drawing.Point(12, 345)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(225, 23)
+        Me.Button4.Size = New System.Drawing.Size(78, 23)
         Me.Button4.TabIndex = 5
-        Me.Button4.Text = "불러오기 + 저장 + 읽기 + 출력 + 삭제"
+        Me.Button4.Text = "save list"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(685, 345)
+        Me.Button5.Location = New System.Drawing.Point(15, 374)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 23)
         Me.Button5.TabIndex = 6
-        Me.Button5.Text = "테스트"
+        Me.Button5.Text = "show lsit"
         Me.Button5.UseVisualStyleBackColor = True
         '
         'ProgressBar1
@@ -229,11 +233,51 @@ Partial Class Form1
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "Label1"
         '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(15, 403)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(75, 23)
+        Me.Button6.TabIndex = 9
+        Me.Button6.Text = "del list"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(186, 345)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(75, 23)
+        Me.Button7.TabIndex = 10
+        Me.Button7.Text = "save reg"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(186, 374)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(75, 23)
+        Me.Button8.TabIndex = 11
+        Me.Button8.Text = "show reg"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(186, 403)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(75, 23)
+        Me.Button9.TabIndex = 12
+        Me.Button9.Text = "del reg"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Button9)
+        Me.Controls.Add(Me.Button8)
+        Me.Controls.Add(Me.Button7)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Button5)
@@ -278,4 +322,8 @@ Partial Class Form1
     Friend WithEvents Button5 As Button
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents Label1 As Label
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Button9 As Button
 End Class

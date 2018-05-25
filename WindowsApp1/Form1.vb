@@ -1,6 +1,7 @@
 ﻿Public Class Form1
-    Public PATH_Exe As String = ""   ' exe파일 탐색 경로
-    Public PATH_List As String = ""   ' 프로그램 절대 경로
+    Public PATH_Exe As String = ""      ' exe파일 탐색 경로
+    Public PATH_List As String = ""     ' 프로그램 절대 경로
+    Public PATH_Reg As String = ""      ' Reg 절대경로
     Public ComputerName As String = ""  ' 컴퓨터 이름
 
 
@@ -47,9 +48,10 @@
         CheckedListBox1.Sorted = True
     End Sub
 
+    ' 완료
     Private Sub DelExe()
         If My.Computer.FileSystem.FileExists(PATH_List & "exe.txt") Then
-            Shell("cmd.exe /c del " & PATH_List & "list.txt")
+            Shell("cmd.exe /c del " & PATH_List & "exe.txt")
             MsgBox("파일 있음")
         End If
 
@@ -80,7 +82,6 @@
         End If
     End Sub
 
-
     ' 완료
     Private Sub ShowList() ' 체크드 리스트 박스에 txt 파일을 읽어서 보여줌 - 설치된 프로그램
         Label1.Text = "설치된 프로그램 리스트"
@@ -108,17 +109,54 @@
 
     ' --------------------------------------------------------------------------  reg 관련 부분
 
+    Private Sub SaveReg()
 
+    End Sub
 
+    Private Sub ShowReg()
+        Label1.Text = "reg 파일 리스트"
+        If My.Computer.FileSystem.FileExists(PATH_List & "reg.txt") Then
+            My.Forms.Form1.CheckedListBox1.Items.Clear()
+            Dim test As System.IO.StreamReader
+            Dim str As String = ""
+            test = My.Computer.FileSystem.OpenTextFileReader(PATH_List & "reg.txt")
+            str = test.ReadLine()
+            Do
+                If str = "" Then
+                    Exit Do
+                End If
+                If str.First.Equals(Chr(32)) Then
+                    str = test.ReadLine()
+                End If
+                Dim a = My.Forms.Form1.CheckedListBox1.Items.Add(Trim(str))
+                str = test.ReadLine()
+            Loop While str <> ""
+        Else
+            MsgBox("저장된 파일이 없습니다!!!")
+        End If
+        CheckedListBox1.Sorted = True
+    End Sub
+
+    Private Sub DelReg()
+        If My.Computer.FileSystem.FileExists(PATH_List & "reg.txt") Then
+            Shell("cmd.exe /c del " & PATH_List & "reg.txt")
+            MsgBox("파일 있음")
+        End If
+
+        If My.Computer.FileSystem.FileExists(PATH_List & "reg.txt") Then
+        Else
+            MsgBox("파일 없음")
+        End If
+    End Sub
 
     ' --------------------------------------------------------------------------  버튼 온클릭 관련 부분
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click ' 리스트 저장
-        SaveList()
+        SaveExe()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click ' 리스트 보기
-        ShowList()
+        ShowExe()
     End Sub
 
     Private Sub 최소화ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 최소화ToolStripMenuItem.Click
@@ -171,39 +209,16 @@
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click ' 리스트박스에 표시
-        DelList()
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        DelExe()
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click '체크 항목 표시
-        SaveList() ' 불러오기 + 저장
-        ShowList() ' 읽기 + 출력
-        DelList() ' 삭제
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        SaveList()
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click '테스트 버튼
-        'Dim x64_programs As String = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\MonitorManage_is1", "Name", "Nothing")
-        'Dim x82_programs As String = My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall", "MonitorManage_is1", "Nothing")
-        'x82_programs = "ddd"
-        'MsgBox(x64_programs & Chr(13) & x82_programs)
-        'MsgBox(peogramPATH)
-        'Shell("cmd.exe /c wmic product get name > " & PATH_List & "list.txt", vbNormalNoFocus)
-        'ShowListToCheckedlist()
-        'Shell("cmd.exe /c del " & PATH_List & "list.txt")
-
-        'Dim iVaule As Int32 = My.Computer.Registry.GetValue("경로", "값 이름", "기본값")
-        'Dim sValue As String = My.Computer.Registry.GetValue("경로", "값 이름", "기본값")
-        'MsgBox(iVaule & Chr(13) & sValue)
-
-        'MsgBox(ComputerName & "\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall")
-        'My.Computer.Registry.CurrentUser.CreateSubKey("HKEY_CURRENT_USER\testKEY")
-        'My.Computer.Registry.SetValue("HKEY_CURRENT_USER\testKEY", "testNAME", "testString")
-        'Dim RegPATH = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ThemeManager"
-        'MsgBox(My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ThemeManager", "LMVersion", "Nothing!!"))
-
-        'MsgBox(My.Computer.Registry.GetValue("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{09215AC7-B15F-A151-B90A-6B432EAD80A8}", "DisplayName", "Nothing!!").ToString())
-
-        SaveExe()
+        ShowList()
     End Sub
 
     Private Sub ProgressBar1_Click(sender As Object, e As EventArgs) Handles ProgressBar1.Click
@@ -216,5 +231,21 @@
 
     Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        DelList()
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        SaveReg()
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        ShowReg()
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        DelReg()
     End Sub
 End Class
