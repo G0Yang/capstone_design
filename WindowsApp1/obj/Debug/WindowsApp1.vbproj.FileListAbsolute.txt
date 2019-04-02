@@ -75,16 +75,16 @@ C:\Users\milk1\Desktop\WindowsApp1 (2)\WindowsApp1\obj\Debug\WindowsApp1.exe
 C:\Users\milk1\Desktop\WindowsApp1 (2)\WindowsApp1\obj\Debug\WindowsApp1.xml
 C:\Users\milk1\Desktop\WindowsApp1 (2)\WindowsApp1\obj\Debug\WindowsApp1.pdb
 C:\Users\milk1\Desktop\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.vbprojAssemblyReference.cache
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\bin\Debug\WindowsApp1.exe.config
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\bin\Debug\WindowsApp1.exe
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\bin\Debug\WindowsApp1.pdb
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\bin\Debug\WindowsApp1.xml
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\obj\Debug\WindowsApp1.vbprojAssemblyReference.cache
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\obj\Debug\WindowsApp1.Form1.resources
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\obj\Debug\WindowsApp1.Form2.resources
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\obj\Debug\WindowsApp1.Resources.resources
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\obj\Debug\WindowsApp1.vbproj.GenerateResource.cache
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\obj\Debug\WindowsApp1.vbproj.CoreCompileInputs.cache
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\obj\Debug\WindowsApp1.exe
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\obj\Debug\WindowsApp1.xml
-C:\Users\milk1\source\repos\capstone_design\WindowsApp1\obj\Debug\WindowsApp1.pdb
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\bin\Debug\WindowsApp1.exe.config
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\bin\Debug\WindowsApp1.exe
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\bin\Debug\WindowsApp1.pdb
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\bin\Debug\WindowsApp1.xml
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.vbprojResolveAssemblyReference.cache
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.Form1.resources
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.Form2.resources
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.Resources.resources
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.vbproj.GenerateResource.cache
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.vbproj.CoreCompileInputs.cache
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.exe
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.xml
+C:\Users\milk1\Downloads\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.pdb
